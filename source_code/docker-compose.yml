@@ -1,0 +1,24 @@
+services:
+  db:
+    image: mysql:9.3
+    container_name: mysql_db_a3
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: salesdb
+      MYSQL_USER: mysql
+      MYSQL_PASSWORD: mysql
+    ports:
+      - "3309:3306"
+    volumes:
+      - ./database/init.sql:/docker-entrypoint-initdb.d/init.sql
+      - mysql-data:/var/lib/mysql
+    networks:
+      - sales-network
+
+volumes:
+  mysql-data:
+
+networks:
+  sales-network:
+    driver: bridge

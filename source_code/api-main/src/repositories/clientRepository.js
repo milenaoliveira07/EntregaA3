@@ -4,3 +4,5 @@ export class ClientRepository extends GenericRepository {
     super(connection, "clients");
   }
 }
+
+

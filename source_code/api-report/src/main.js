@@ -1,14 +1,10 @@
-import { sequelize } from "./config/database.js";
-import express from "express";
 import "dotenv/config";
+import express from "express";
 
 const app = express();
-const PORT = process.env.PORT;
+const PORT = process.env.PORT || 3000;
 
-sequelize
-  .authenticate()
-  .then(() => {
-    console.log("Connection made successfully");
-    app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
-  })
-  .catch((e) => console.error("Error:", e));
+app.use(express.json());
+// app.use("/api");
+
+app.listen(PORT, console.log(`Server running on port ${PORT}`));

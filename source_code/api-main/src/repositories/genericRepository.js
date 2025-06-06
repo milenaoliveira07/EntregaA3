@@ -10,11 +10,12 @@ export class GenericRepository {
     const placeholders = values.map(() => "?").join(", ");
 
     const query = `INSERT INTO ${this.tableName} (${keys}) VALUES (${placeholders})`;
+
     const [result] = await this.connection.query(query, values);
 
     return {
       id: result.insertId,
-      ...data
+      ...data,
     };
   }
 
@@ -26,17 +27,17 @@ export class GenericRepository {
   }
 
   async findById(id) {
-  const [rows] = await this.connection.query(
-    `SELECT * FROM ${this.tableName} WHERE id = ?;`,
-    [id]
-  );
-  return rows[0];
-}
+    const [rows] = await this.connection.query(
+      `SELECT * FROM ${this.tableName} WHERE id = ?;`,
+      [id]
+    );
+    return rows[0];
+  }
 
   async update(id, data) {
     const keys = Object.keys(data);
     const values = Object.values(data);
-    const setClause = keys.map(key => `${key} = ?`).join(", ");
+    const setClause = keys.map((key) => `${key} = ?`).join(", ");
 
     const query = `UPDATE ${this.tableName} SET ${setClause} WHERE id = ?;`;
     await this.connection.query(query, [...values, id]);
@@ -45,10 +46,17 @@ export class GenericRepository {
   }
 
   async delete(id) {
-    await this.connection.query(
-      `DELETE FROM ${this.tableName} WHERE id = ?;`,
-      [id]
-    );
+    await this.connection.query(`DELETE FROM ${this.tableName} WHERE id = ?;`, [
+      id,
+    ]);
     return { message: "Deleted successfully", id };
+  }
+
+  async findByOne(field, value) {
+    const [rows] = await this.connection.query(
+      `SELECT * FROM ${this.tableName} WHERE ${field} = ?;`,
+      [value]
+    );
+    return rows[0];
   }
 }

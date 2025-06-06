@@ -1,5 +1,6 @@
 import { createSeller, updateSeller } from "../schemas/sellerSchema.js";
 import { SellerService } from "../services/sellerService.js";
+import { validateID } from "../utils/validateID.js";
 
 const sellerService = new SellerService();
 class SellerController {

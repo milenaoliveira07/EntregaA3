@@ -1,7 +1,9 @@
 # 🛍️ Projeto de Simulação de Vendas para Loja de TI
 
 **Unidade Curricular**: Sistemas Distribuídos e Mobile
+
 **Professor**: Adailton de Jesus
+
 **Período**: 2025.1
 
 ## 🚀 Introdução

@@ -69,6 +69,16 @@ class SaleController {
       res.status(500).json({ error: error.message });
     }
   }
+
+  async cancel(req, res) {
+    try {
+      const id = validateID(req.params.id);
+      const sale = await saleService.cancel(id);
+      res.status(200).json(sale);
+    } catch (error) {
+      res.status(500).json({ error: error.message });
+    }
+  }
 }
 
-export default new SaleController()
+export default new SaleController();

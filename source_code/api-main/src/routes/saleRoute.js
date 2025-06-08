@@ -7,6 +7,7 @@ router.get("/sales", SaleController.findAll);
 router.get("/sales/:id", SaleController.findById);
 router.post("/sales", SaleController.create);
 router.put("/sales/:id", SaleController.update);
+router.patch("/sales/:id/cancel", SaleController.cancel);
 router.delete("/sales/:id", SaleController.delete);
 
 export default router;

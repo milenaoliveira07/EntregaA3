@@ -44,6 +44,29 @@ export class ClientService {
     if (!client) {
       throw new Error("Client not found");
     }
+
+    if (data.email !== client.email) {
+      const existingEmail = await this.clientRepository.findByOne(
+        "email",
+        data.email
+      );
+
+      if (existingEmail) {
+        throw new Error("Client with this email already exists");
+      }
+    }
+
+    if (data.phone !== client.phone) {
+      const existingPhone = await this.clientRepository.findByOne(
+        "phone",
+        data.phone
+      );
+
+      if (existingPhone) {
+        throw new Error("Client with this phone number already exists");
+      }
+    }
+
     return await this.clientRepository.update(id, data);
   }
 

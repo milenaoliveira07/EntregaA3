@@ -1,5 +1,6 @@
 import db from "../config/database.js";
 import { SellerRepository } from "../repositories/sellerRepository.js";
+import { generateRegistration } from "../utils/generateRegistration.js";
 
 export class SellerService {
   constructor() {
@@ -19,6 +20,13 @@ export class SellerService {
   }
 
   async create(data) {
+    if (await this.sellerRepository.findByOne("email", data.email)) {
+      throw new Error("Seller with this email already exists");
+    }
+
+    data.registration = generateRegistration(data.registration_prefix);
+    delete data.registration_prefix;
+
     return await this.sellerRepository.create(data);
   }
 

@@ -12,7 +12,7 @@ CREATE TABLE sellers(
     id INT AUTO_INCREMENT PRIMARY KEY,
     full_name VARCHAR(80) NOT NULL,
     email VARCHAR(150) UNIQUE NOT NULL,
-    registration VARCHAR(9) UNIQUE NOT NULL,
+    registration VARCHAR(25) UNIQUE NOT NULL,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 );
@@ -143,3 +143,21 @@ INSERT INTO products (name, description, price, stock_quantity, low_stock, categ
     20, 
     4, 
     'Acessórios');
+
+INSERT INTO sales (client_id, seller_id, sale_date, status) VALUES
+    (1, 1, '2023-10-01 10:00:00', 'Completed'),
+    (2, 2, '2023-10-02 11:30:00', 'Processing'),
+    (3, 3, '2023-10-03 14:15:00', 'Cancelled'),
+    (4, 1, '2023-10-04 09:45:00', 'Completed'),
+    (5, 2, '2023-10-05 16:20:00', 'Processing');
+    
+INSERT INTO sale_items (sale_id, product_id, quantity_purchased, unit_price_sale) VALUES
+    (1, 1, 2, 199.90),
+    (1, 2, 1, 289.99),
+    (1, 3, 1, 349.00),
+    (2, 4, 1, 899.50),
+    (3, 5, 1, 450.00),
+    (4, 6, 1, 299.00),
+    (4, 7, 2, 180.00),
+    (5, 8, 1, 1899.00),
+    (5, 9, 1, 4500.00);
